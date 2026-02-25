@@ -1,2 +1,3 @@
 # AE575Team1
-Group project for AE575's VR "BID" Project
+Description: Group project for AE575's VR "BID" Project
+Please coordinate usage with team member before modifying to avoid clashes!
