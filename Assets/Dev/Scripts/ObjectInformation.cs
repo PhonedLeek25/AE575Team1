@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObjectInformation : MonoBehaviour
 {
@@ -42,6 +43,10 @@ public class ObjectInformation : MonoBehaviour
 
     [Space(60)]
     [Header("------- IGNORE BELOW -------")]
+
+    [Header("Debug Testing:")]
+    public string DebugInput = "";
+    public bool executeInput = false;
 
     [Header("Force Cost (Ignore if you don't know what you're doing)")]
     public int costA;
@@ -110,6 +115,8 @@ public class ObjectInformation : MonoBehaviour
 
             //Push to Cost Data database gameObject
         }
+
+        StartCoroutine(DebugTestingRoutine());
     }
 
     public int calculateCost()
@@ -146,5 +153,25 @@ public class ObjectInformation : MonoBehaviour
         if (ActiveTexture == option.B) { rend.material.mainTexture = textureB; }
         if (ActiveTexture == option.C) { rend.material.mainTexture = textureC; }
         CurrentCost = calculateCost();
+    }
+
+    IEnumerator DebugTestingRoutine()
+    {
+        while (true)
+        {
+            if (executeInput)
+            {
+                executeInput = false;
+                //DEBUG FUNCTION START
+
+                if (DebugInput == "A") { changeTexture(option.A); }
+                if (DebugInput == "B") { changeTexture(option.B); }
+                if (DebugInput == "C") { changeTexture(option.C); }
+
+                //DEBUG FUNCTION END
+            }
+
+            yield return new WaitForSeconds(1f); // wait 1 second
+        }
     }
 }
