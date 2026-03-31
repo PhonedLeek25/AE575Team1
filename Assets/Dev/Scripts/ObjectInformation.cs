@@ -13,15 +13,25 @@ public class ObjectInformation : MonoBehaviour
     [Header("Current Option:")]
     public option ActiveTexture = option.A;
 
-    [Header("ASSIGN MATERIAL/TEXTURE INFORMATION")]
-    public Material materialA;
+    [Header("ASSIGN TEXTURE INFORMATION")]
+    public Texture textureA;
     public int costPerUnitA;
 
-    public Material materialB;
+    public Texture textureB;
     public int costPerUnitB;
 
-    public Material materialC;
+    public Texture textureC;
     public int costPerUnitC;
+    
+    //[Header("ASSIGN TEXTURE INFORMATION")]
+    //public Material materialA;
+    //public int costPerUnitA;
+    //
+    //public Material materialB;
+    //public int costPerUnitB;
+    //
+    //public Material materialC;
+    //public int costPerUnitC;
 
     [Header("ASSIGN OBJECT INFORMATION")]
     public string CustomName = "";
@@ -44,12 +54,13 @@ public class ObjectInformation : MonoBehaviour
 
     public CostUnits unitOfMeasurement = CostUnits.None;
 
-    private MeshRenderer meshRenderer;
+    private MeshRenderer meshRenderer; //NOT USING RN
+    public Renderer rend;
     public CostData CostDataScript;
     void Start()
     {
         //Sanity Checks
-        if (materialA == null && materialB == null && materialC == null)
+        if (textureA == null && textureB == null && textureC == null)
         {
             Debug.LogWarning("It seems you forgot to put a textures for \"" + this.gameObject.name + "\" !" +
                 "\n will return to avoid issues.");
@@ -58,24 +69,27 @@ public class ObjectInformation : MonoBehaviour
         if (UnitQuantity <= 0) { Debug.LogWarning("Seems like no unit quantity was assigned to \"" + gameObject.name + "\"!"); }
 
         //Superceed dumb logic (idiot proofing) --> rearranging textures so A always has a texture then B then C.
-        if (materialA == null && materialB != null)
+        if (textureA == null && textureB != null)
         {
-            materialA = materialB;
-            materialB = null;
+            textureA = textureB;
+            textureB = null;
         }
-        else if (materialA == null && materialC != null)
+        else if (textureA == null && textureC != null)
         {
-            materialA = materialC;
-            materialC = null;
+            textureA = textureC;
+            textureC = null;
         }
-        if (materialB == null && materialC != null)
+        if (textureB == null && textureC != null)
         {
-            materialB = materialC;
-            materialC = null;
+            textureB = textureC;
+            textureC = null;
         }
 
         //Linking
-        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null) { meshRenderer = GetComponent<MeshRenderer>(); } //NOT USING RN
+        if (meshRenderer == null) { Debug.LogWarning("Failed to get MeshRendered component"); }
+        if (rend == null) { rend = GetComponent<Renderer>(); }
+        if (rend == null) { Debug.LogWarning("Failed to get MeshRendered component"); }
         if (CostDataScript == null)
         {
             GameObject obj = GameObject.FindWithTag("CostTracker");
@@ -87,41 +101,50 @@ public class ObjectInformation : MonoBehaviour
             }
 
             //some calculations and stuff
-            if (materialA != null) { textureCount++; }
-            if (materialB != null) { textureCount++; }
-            if (materialC != null) { textureCount++; }
+            if (textureA != null) { textureCount++; }
+            if (textureB != null) { textureCount++; }
+            if (textureC != null) { textureCount++; }
             if (CustomName == "") { CustomName = this.gameObject.name; }
             CurrentCost = calculateCost();
             if (CurrentCost == 0) { Debug.LogWarning("Warning, " + CustomName + " calculated cost = 0!"); }
 
             //Push to Cost Data database gameObject
         }
+    }
 
-        int calculateCost()
+    public int calculateCost()
+    {
+        if (ActiveTexture == option.A)
         {
-            if (ActiveTexture == option.A)
-            {
-                return UnitQuantity * costA;
-            }
-            if (ActiveTexture == option.B)
-            {
-                return UnitQuantity * costB;
-            }
-            if (ActiveTexture == option.C)
-            {
-                return UnitQuantity * costC;
-            }
-            return 0;
+            return UnitQuantity * costA;
         }
+        if (ActiveTexture == option.B)
+        {
+            return UnitQuantity * costB;
+        }
+        if (ActiveTexture == option.C)
+        {
+            return UnitQuantity * costC;
+        }
+        return 0;
+    }
 
-        //NEED A WAY TO TRIGGER THIS
-        void changeTexture(option option)
-        {
-            this.ActiveTexture = option;
-            if (ActiveTexture == option.A) { meshRenderer.material = materialA; }
-            if (ActiveTexture == option.B) { meshRenderer.material = materialB; }
-            if (ActiveTexture == option.C) { meshRenderer.material = materialC; }
-            CurrentCost = calculateCost();
-        }
+    //NEED A WAY TO TRIGGER THIS
+
+    //public void changeMaterial(option option)
+    //{
+    //    this.ActiveTexture = option;
+    //    if (ActiveTexture == option.A) { meshRenderer.material = materialA; }
+    //    if (ActiveTexture == option.B) { meshRenderer.material = materialB; }
+    //    if (ActiveTexture == option.C) { meshRenderer.material = materialC; }
+    //    CurrentCost = calculateCost();
+    //}
+    public void changeTexture(option option)
+    {
+        this.ActiveTexture = option;
+        if (ActiveTexture == option.A) { rend.material.mainTexture = textureA; }
+        if (ActiveTexture == option.B) { rend.material.mainTexture = textureB; }
+        if (ActiveTexture == option.C) { rend.material.mainTexture = textureC; }
+        CurrentCost = calculateCost();
     }
 }
