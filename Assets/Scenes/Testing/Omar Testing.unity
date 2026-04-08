@@ -10085,11 +10085,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 460659972069420785, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 460659972069420785, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 626717511048058018, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_Name
@@ -10137,39 +10137,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824649475811238340, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5824649475811238340, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5824649475811238340, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 352
       objectReference: {fileID: 0}
     - target: {fileID: 5824649475811238340, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5824649475811238340, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -44
       objectReference: {fileID: 0}
     - target: {fileID: 6301407982318299774, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 7615670771834390170, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7615670771834390170, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7615670771834390170, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 8465829238368685186, guid: f7581d63912ecff4f803666cc0991e9a, type: 3}
       propertyPath: ObjInfoScript
@@ -14429,7 +14429,6 @@ MonoBehaviour:
   DebugInput: 
   executeInput: 0
   textureCount: 0
-  unitOfMeasurement: 0
   rend: {fileID: 0}
   CostDataScript: {fileID: 0}
 --- !u!1 &1419460409
@@ -16403,7 +16402,7 @@ GameObject:
   - component: {fileID: 1644953799}
   m_Layer: 0
   m_Name: Cost Tracker
-  m_TagString: Untagged
+  m_TagString: CostTracker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16435,7 +16434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dfe6cb393afd64499e4a9485c161b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjInfoRef: {fileID: 0}
+  TextBox: {fileID: 0}
+  ObjectsInScene: []
+  ObjectCount: 0
 --- !u!1 &1645451340
 GameObject:
   m_ObjectHideFlags: 0
@@ -17223,7 +17224,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 1.4e-44, z: 1.8548e-41, w: NaN}
+  m_BoundingSphereOverride: {x: 9.22e-43, y: 0, z: 0, w: -3.6090637e+29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -19937,7 +19938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2133790184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19969,7 +19970,6 @@ MonoBehaviour:
   DebugInput: 
   executeInput: 0
   textureCount: 0
-  unitOfMeasurement: 0
   rend: {fileID: 0}
   CostDataScript: {fileID: 0}
 --- !u!65 &2133790185

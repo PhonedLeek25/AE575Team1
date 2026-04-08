@@ -5,13 +5,6 @@ using UnityEngine.UI;
 
 public class ObjectInformation : MonoBehaviour
 {
-
-    /*
-    void Update()
-    {
-        
-    }*/
-
     public enum option { A, B, C };
     [Header("Current Option:")]
     public option ActiveTextureOption = option.A;
@@ -67,8 +60,6 @@ public class ObjectInformation : MonoBehaviour
     [Header("Current Information (for debug purposes)")]
     public int textureCount = 0;
 
-    public CostUnits unitOfMeasurement = CostUnits.None;
-
     private MeshRenderer meshRenderer; //NOT USING RN
     public Renderer rend;
     public CostData CostDataScript;
@@ -78,17 +69,9 @@ public class ObjectInformation : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("InteractableRaycast");
         var count = GetComponents<ObjectInformation>().Length;
         if (count > 1) { Debug.LogError($"{gameObject.name} has {count} ObjectInformation components!", this); }
-        //imageA.sprite = Sprite.Create((Texture2D)textureA, new Rect(0, 0, textureA.width, textureA.height), new Vector2(0.5f, 0.5f));
-        //imageB.sprite = Sprite.Create((Texture2D)textureB, new Rect(0, 0, textureB.width, textureB.height), new Vector2(0.5f, 0.5f));
-        //imageC.sprite = Sprite.Create((Texture2D)textureC, new Rect(0, 0, textureC.width, textureC.height), new Vector2(0.5f, 0.5f));
-
-
-        /*
-        foreach (Transform t in GetComponentsInChildren<Transform>())
-        {
-            t.gameObject.layer = LayerMask.NameToLayer("InteractableRaycast");
-        }
-        */
+        /*imageA.sprite = Sprite.Create((Texture2D)textureA, new Rect(0, 0, textureA.width, textureA.height), new Vector2(0.5f, 0.5f));
+        imageB.sprite = Sprite.Create((Texture2D)textureB, new Rect(0, 0, textureB.width, textureB.height), new Vector2(0.5f, 0.5f));
+        imageC.sprite = Sprite.Create((Texture2D)textureC, new Rect(0, 0, textureC.width, textureC.height), new Vector2(0.5f, 0.5f));*/
 
         //Sanity Checks
         if (textureA == null && textureB == null && textureC == null)
@@ -117,6 +100,14 @@ public class ObjectInformation : MonoBehaviour
             textureC = null;
         }
 
+        //Calcs before linking
+        if (textureA != null) { textureCount++; }
+        if (textureB != null) { textureCount++; }
+        if (textureC != null) { textureCount++; }
+        if (CustomName == "") { CustomName = this.gameObject.name; }
+        currentCost = calculateCost();
+        if (currentCost == 0) { Debug.LogWarning("Warning, " + CustomName + " calculated cost = 0!"); }
+
         //Linking
         if (meshRenderer == null) { meshRenderer = GetComponent<MeshRenderer>(); } //NOT USING RN
         if (meshRenderer == null) { Debug.LogWarning("Failed to get MeshRendered component"); }
@@ -131,23 +122,32 @@ public class ObjectInformation : MonoBehaviour
                 Debug.LogWarning("ObjectInformation.cs script on " + gameObject.name +
                 " was not able to find the CostData script.");
             }
-
-            //some calculations and stuff
-            if (textureA != null) { textureCount++; }
-            if (textureB != null) { textureCount++; }
-            if (textureC != null) { textureCount++; }
-            if (CustomName == "") { CustomName = this.gameObject.name; }
-            currentCost = calculateCost();
-            if (currentCost == 0) { Debug.LogWarning("Warning, " + CustomName + " calculated cost = 0!"); }
-
-            //Push to Cost Data database gameObject
         }
 
         //Final Calculations and Setup
         changeTexture(ActiveTextureOption);
 
+    }
+    void Start()
+    {
+        //Link to CostData script
+        if (CostDataScript == null)
+        {
+            GameObject obj = GameObject.FindWithTag("CostTracker");
+            if (obj != null) { CostDataScript = obj.GetComponent<CostData>(); }
+            if (CostDataScript != null)
+            {
+                Debug.LogWarning("ObjectInformation.cs script on " + gameObject.name +
+                " was not able to find the CostData script.");
+            }
+        }
+        CostDataScript.AddObjCostData(this);
         //Debug Testing
         StartCoroutine(DebugTestingRoutine());
+    }
+    public void AlexActivateMePleaseThankYouOBJINFO()
+    {
+
     }
     public int calculateCost()
     {

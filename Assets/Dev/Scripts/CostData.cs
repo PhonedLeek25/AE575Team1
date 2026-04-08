@@ -1,14 +1,7 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
-public enum TextureTypes
-{
-    None, Wall, Ceiling, Floor, FFE
-}
-public enum CostUnits
-{
-    None, SF, LF, EA
-}
+using UnityEngine.UI;
 
 //public class ObjectInfo
 //{
@@ -36,9 +29,31 @@ public enum CostUnits
 
 public class CostData : MonoBehaviour
 {
-    public ObjectInformation ObjInfoRef;
+    [Header("UI Reference")]
+    public TextMeshProUGUI TextBox;
+    public List<ObjectInformation> ObjectsInScene = new List<ObjectInformation>();
+    public int ObjectCount = 0;
     private void Start()
     {
-        ObjInfoRef.changeTexture(ObjectInformation.option.A);
+        
+    }
+    public void ShowCurrentList()
+    {
+        string textBuffer = "NothingAssigned";
+        foreach (ObjectInformation objInfo in ObjectsInScene)
+        {
+            //Debug.Log("Object Name: " + objInfo.CustomName + ", Texture: " + objInfo.currentTextureName + ", Cost: " + objInfo.currentCost);
+            textBuffer = "Object Name: " + objInfo.CustomName + ", Texture: " + objInfo.currentTextureName + ", Cost: " + objInfo.currentCost;
+        }
+        if (textBuffer == "NothingAssigned")
+        {
+            Debug.LogWarning("Attempting to output text but empty.");
+            return;
+        }
+        TextBox.text = textBuffer;
+    }
+    public void AddObjCostData(ObjectInformation objInfo)
+    {
+        ObjectsInScene.Add(objInfo); ObjectCount++;
     }
 }
