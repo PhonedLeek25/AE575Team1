@@ -17224,7 +17224,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 9.22e-43, y: 0, z: 0, w: -3.6090637e+29}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 1.5e-44, z: 7.626e-42, w: 4.7804968e-36}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -22152,6 +22152,10 @@ PrefabInstance:
     - target: {fileID: 2364870474835363655, guid: b276617ba63a1ce4da57862b304166c6, type: 3}
       propertyPath: m_Name
       value: Test Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676733655661962019, guid: b276617ba63a1ce4da57862b304166c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3167069161023691120, guid: b276617ba63a1ce4da57862b304166c6, type: 3}
       propertyPath: m_AnchorMax.x
