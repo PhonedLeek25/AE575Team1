@@ -50,6 +50,9 @@ public class ObjectInformation : MonoBehaviour
     //public Material materialC;
     //public int costPerUnitC;
 
+    [Header("UI Panel")]
+    public GameObject objectUI;
+
     [Space(60)]
     [Header("------- IGNORE BELOW -------")]
 
@@ -147,8 +150,16 @@ public class ObjectInformation : MonoBehaviour
     }
     public void AlexActivateMePleaseThankYouOBJINFO()
     {
-
+        if (objectUI != null)
+            objectUI.SetActive(!objectUI.activeSelf);
     }
+
+    public void DeactivateUI()
+    {
+        if (objectUI != null)
+            objectUI.SetActive(false);
+    }
+
     public int calculateCost()
     {
         if (ActiveTextureOption == option.A)
