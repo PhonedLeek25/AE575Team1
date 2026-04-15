@@ -1,59 +1,69 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
-//public class ObjectInfo
-//{
-//    public string Name;
-//    //public string textureName;
-//    public Texture texture;
-//    public int TextureCostPerUnit;
-//    public int CurrentCost;
-//    public ObjectInfo(string Name, Texture texture, int TextureCostPerUnit, int CurrentCost)
-//    {
-//        this.Name = Name;
-//        this.texture = texture;
-//        this.TextureCostPerUnit = TextureCostPerUnit;
-//        this.CurrentCost = CurrentCost;
-//    }
-//}
-
-//[SerializeField]
-//public List<ObjectInfo> ObjectsInScene = new List<ObjectInfo>();
-//public void AddItem(string Name, Texture texture = null, int TextureCostPerUnit = 0, int CurrentCost = 0)
-//{
-//    ObjectsInScene.Add(new ObjectInfo(Name, texture, TextureCostPerUnit, CurrentCost));
-//}
-
+using UnityEngine.InputSystem;
 
 public class CostData : MonoBehaviour
 {
-    [Header("UI Reference")]
-    public TextMeshProUGUI TextBox;
+    [Header("ObjectsInSceneList")]
     public List<ObjectInformation> ObjectsInScene = new List<ObjectInformation>();
-    public int ObjectCount = 0;
-    private void Start()
+    [Header("UI Reference")]
+    public GameObject CanvasGameObj;
+    public TextMeshProUGUI TextBox;
+    bool UI_On = true;
+    [Header("TriggerAction")]
+    public InputActionReference triggerAction;
+    void Start()
     {
-        
+        if (TextBox == null)
+        {
+            Debug.LogWarning("You Forgot to link a textbox to Cost Data!");
+            //GameObject obj = GameObject.FindWithTag("ObjectsInSceneUITag");
+            //if (obj != null)
+            //{
+            //    TextBox = obj.GetComponent<TextMeshProUGUI>();
+            //    if (TextBox == null) { Debug.LogWarning("Couldn't find the TMPro component on " + obj.name); }
+            //}
+            //else { Debug.LogWarning("Couldn't find a GameObject with tag ObjectsInSceneUITag"); }
+        }
+        if (CanvasGameObj == null) { Debug.LogWarning("You forgot to link a canvas GameObject to Cost Data!"); }
+    }
+    void OnEnable()
+    {
+        if (triggerAction == null) { Debug.LogError("Trigger Action not assigned!"); return; }
+
+        triggerAction.action.performed += OnTriggerPressed;
+        triggerAction.action.Enable();
+    }
+
+    private void OnTriggerPressed(InputAction.CallbackContext context)
+    {
+        UI_On = !UI_On;
+        CanvasGameObj.SetActive(UI_On);
+        ShowCurrentList();
     }
     public void ShowCurrentList()
     {
-        string textBuffer = "NothingAssigned";
+        int totalcost = 0;
+        string textBuffer = "";
         foreach (ObjectInformation objInfo in ObjectsInScene)
         {
-            //Debug.Log("Object Name: " + objInfo.CustomName + ", Texture: " + objInfo.currentTextureName + ", Cost: " + objInfo.currentCost);
-            textBuffer = "Object Name: " + objInfo.CustomName + ", Texture: " + objInfo.currentTextureName + ", Cost: " + objInfo.currentCost;
+            textBuffer += "- " + objInfo.CustomName + ", Texture: " + objInfo.currentTextureName +
+                ", Cost: " + objInfo.currentCost + "\n";
+            totalcost += objInfo.currentCost;
         }
-        if (textBuffer == "NothingAssigned")
+        if (textBuffer == "")
         {
             Debug.LogWarning("Attempting to output text but empty.");
             return;
         }
+        textBuffer += "\n TOTAL CURRENT COST: " + totalcost;
+        //Debug.Log(textBuffer);
         TextBox.text = textBuffer;
     }
-    public void AddObjCostData(ObjectInformation objInfo)
+    private void OnDisable()
     {
-        ObjectsInScene.Add(objInfo); ObjectCount++;
+        triggerAction.action.performed -= OnTriggerPressed;
+        triggerAction.action.Disable();
     }
 }

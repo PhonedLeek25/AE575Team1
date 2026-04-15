@@ -1,5 +1,15 @@
 using System.Collections;
 using UnityEngine;
+
+[RequireComponent(typeof(BoxCollider))]
+public class YourScriptName : MonoBehaviour
+{
+    void Start()
+    {
+        BoxCollider col = GetComponent<BoxCollider>();
+        // safe to use – it WILL exist
+    }
+}
 public class ObjectInformation : MonoBehaviour
 {
     public enum option { A, B, C };
