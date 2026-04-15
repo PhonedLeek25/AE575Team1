@@ -23,21 +23,23 @@ public class RaySelector : MonoBehaviour
         bool didHit = Physics.Raycast(transform.position, transform.forward,
             out hit, rayLength, selectableLayers);
 
-        if (triggerPressed)
+        /*if (triggerPressed)
         {
             if (didHit)
             {
                 ObjectInformation objInfoScript = hit.collider.GetComponentInParent<ObjectInformation>();
-
                 if (objInfoScript != null)
                 {
-                    Debug.Log("Trigger pressed on: " + objInfoScript.CustomName);
-
-                    // Open new UI
-                    objInfoScript.ActivateUI();
-
-                    // Track current
-                    currentObjInfoScript = objInfoScript;
+                    if (currentObjInfoScript == objInfoScript)
+                    {
+                        CloseCurrentUI();
+                    }
+                    else
+                    {
+                        CloseCurrentUI();
+                        objInfoScript.ActivateUI();
+                        currentObjInfoScript = objInfoScript;
+                    }
                 }
                 else
                 {
@@ -48,6 +50,30 @@ public class RaySelector : MonoBehaviour
             {
                 // Clicked empty space
                 CloseCurrentUI();
+            }
+        }*/
+        if (triggerPressed)
+        {
+            if (didHit)
+            {
+                ObjectInformation objInfoScript = hit.collider.GetComponentInParent<ObjectInformation>();
+
+                if (objInfoScript != null)
+                {
+                    Debug.Log("Trigger pressed on: " + objInfoScript.CustomName);
+
+                    // Only close if clicking a DIFFERENT object
+                    if (currentObjInfoScript != null && currentObjInfoScript != objInfoScript)
+                    {
+                        currentObjInfoScript.DeactivateUI();
+                    }
+
+                    // Open new object UI
+                    objInfoScript.ActivateUI();
+
+                    // Track current
+                    currentObjInfoScript = objInfoScript;
+                }
             }
         }
     }
