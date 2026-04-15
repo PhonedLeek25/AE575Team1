@@ -8,7 +8,6 @@ public class RaySelector : MonoBehaviour
     public LayerMask selectableLayers;
 
     private ObjectInformation currentObjInfoScript;
-    private bool triggerWasPressed = false;
 
     void Start()
     {

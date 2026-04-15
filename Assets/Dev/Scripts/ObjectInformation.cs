@@ -131,9 +131,9 @@ public class ObjectInformation : MonoBehaviour
         if (!CostDataScript.ObjectsInScene.Contains(this)) { CostDataScript.ObjectsInScene.Add(this); }
 
         //Link to ObjUIScript
-        ObjectUIHandler ObjUIScript = GetComponentInChildren<ObjectUIHandler>();
+        ObjectUIHandler ObjUIScript = GetComponentInChildren<ObjectUIHandler>(true);
         if (ObjUIScript != null) { objectUI = ObjUIScript.gameObject; }
-        else { Debug.LogWarning("No ObjUIScript found in children of " + CustomName); }
+        else { Debug.LogWarning("No ObjUIScript found in children of " + CustomName + "(" +gameObject.name + ")"); }
 
         //Debug Testing
         StartCoroutine(DebugTestingRoutine());
