@@ -1,8 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
-
 public class ObjectInformation : MonoBehaviour
 {
     public enum option { A, B, C };
@@ -16,7 +13,7 @@ public class ObjectInformation : MonoBehaviour
     [Header("ASSIGN OBJECT INFORMATION:")]
     public string CustomName = "";
     public bool moveableObject = false;
-    public int UnitQuantity = 0;//ignore Quanity if you're setting total costs
+    public GameObject objectUI;
 
     [Header("ASSIGN TEXTURE INFORMATION")]
     [Space(10)]
@@ -50,15 +47,12 @@ public class ObjectInformation : MonoBehaviour
     //public Material materialC;
     //public int costPerUnitC;
 
-    [Header("UI Panel")]
-    public GameObject objectUI;
-
     [Space(60)]
     [Header("------- IGNORE BELOW -------")]
 
     [Header("Debug Testing:")]
     public string DebugInput = "";
-    public bool executeInput = false;
+    public bool DebugMode = false;
 
     [Header("Current Information (for debug purposes)")]
     public int textureCount = 0;
@@ -116,16 +110,6 @@ public class ObjectInformation : MonoBehaviour
         if (meshRenderer == null) { Debug.LogWarning("Failed to get MeshRendered component"); }
         if (rend == null) { rend = GetComponent<Renderer>(); }
         if (rend == null) { Debug.LogWarning("Failed to get MeshRendered component"); }
-        if (CostDataScript == null)
-        {
-            GameObject obj = GameObject.FindWithTag("CostTracker");
-            if (obj != null) { CostDataScript = obj.GetComponent<CostData>(); }
-            if (CostDataScript != null)
-            {
-                Debug.LogWarning("ObjectInformation.cs script on " + gameObject.name +
-                " was not able to find the CostData script.");
-            }
-        }
 
         //Final Calculations and Setup
         changeTexture(ActiveTextureOption);
@@ -137,27 +121,22 @@ public class ObjectInformation : MonoBehaviour
         if (CostDataScript == null)
         {
             GameObject obj = GameObject.FindWithTag("CostTracker");
-            if (obj != null) { CostDataScript = obj.GetComponent<CostData>(); }
-            if (CostDataScript != null)
+            if (obj != null)
             {
-                Debug.LogWarning("ObjectInformation.cs script on " + gameObject.name +
-                " was not able to find the CostData script.");
+                CostDataScript = obj.GetComponent<CostData>();
+                if (CostDataScript == null) { Debug.LogWarning("Found Cost Tracker, but unable to find in components CostData script"); }
             }
+            else { Debug.LogWarning("Failed to find gameObject with tag \"CostTracker\""); }
         }
-        CostDataScript.AddObjCostData(this);
+        if (!CostDataScript.ObjectsInScene.Contains(this)) { CostDataScript.ObjectsInScene.Add(this); }
+
+        //Link to ObjUIScript
+        ObjectUIHandler ObjUIScript = GetComponentInChildren<ObjectUIHandler>();
+        if (ObjUIScript != null) { objectUI = ObjUIScript.gameObject; }
+        else { Debug.LogWarning("No ObjUIScript found in children of " + CustomName); }
+
         //Debug Testing
         StartCoroutine(DebugTestingRoutine());
-    }
-    public void AlexActivateMePleaseThankYouOBJINFO()
-    {
-        if (objectUI != null)
-            objectUI.SetActive(!objectUI.activeSelf);
-    }
-
-    public void DeactivateUI()
-    {
-        if (objectUI != null)
-            objectUI.SetActive(false);
     }
 
     public int calculateCost()
@@ -179,8 +158,6 @@ public class ObjectInformation : MonoBehaviour
         }
         return 0;
     }
-
-    //NEED A WAY TO TRIGGER THIS
 
     //public void changeMaterial(option option)
     //{
@@ -208,23 +185,40 @@ public class ObjectInformation : MonoBehaviour
         rend.materials = mats;
 
     }
+
+    public void ActivateUI()
+    {
+        if (objectUI != null) { objectUI.SetActive(true); }
+        else { Debug.LogWarning("Recieved Clicked() order on " + CustomName + " but no objectUI Object set!"); }
+    }
+    public void DeactivateUI()
+    {
+        if (objectUI != null) { objectUI.SetActive(false); }
+    }
+
     IEnumerator DebugTestingRoutine()
     {
         while (true)
         {
-            if (executeInput)
+            if (DebugMode)
             {
-                executeInput = false;
+                DebugMode = false;
                 //DEBUG FUNCTION START
 
                 if (DebugInput == "A") { changeTexture(option.A); }
                 if (DebugInput == "B") { changeTexture(option.B); }
                 if (DebugInput == "C") { changeTexture(option.C); }
+                if (DebugInput == "E") { CostDataScript.ShowCurrentList(); }
 
                 //DEBUG FUNCTION END
             }
 
             yield return new WaitForSeconds(1f); // wait 1 second
         }
+    }
+
+    private void OnDisable()
+    {
+        if (CostDataScript != null) { CostDataScript.ObjectsInScene.Remove(this); }
     }
 }

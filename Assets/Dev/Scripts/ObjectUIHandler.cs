@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjUIScript : MonoBehaviour
+public class ObjectUIHandler : MonoBehaviour
 {
     [Header("Permanent Link")]
     public ObjectInformation ObjInfoScript;
@@ -91,9 +91,4 @@ public class ObjUIScript : MonoBehaviour
     {
 
     }
-
-    //void Update()
-    //{
-    //    
-    //}
 }
