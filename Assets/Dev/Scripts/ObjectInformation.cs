@@ -138,10 +138,14 @@ public class ObjectInformation : MonoBehaviour
             }
             else { Debug.LogWarning("Failed to find gameObject with tag \"CostTracker\""); }
         }
-        if (!CostDataScript.ObjectsInScene.Contains(this)) { CostDataScript.ObjectsInScene.Add(this); }
+        if (CostDataScript != null)
+        {
+            if (!CostDataScript.ObjectsInScene.Contains(this)) { CostDataScript.ObjectsInScene.Add(this); }
+        }
+        else { Debug.Log("Skipping logging this item in the CostDataScript,"); }
 
-        //Link to ObjUIScript
-        ObjectUIHandler ObjUIScript = GetComponentInChildren<ObjectUIHandler>(true);
+            //Link to ObjUIScript
+            ObjectUIHandler ObjUIScript = GetComponentInChildren<ObjectUIHandler>(true);
         if (ObjUIScript != null) { objectUI = ObjUIScript.gameObject; }
         else { Debug.LogWarning("No ObjUIScript found in children of " + CustomName + "(" +gameObject.name + ")"); }
 
