@@ -12,9 +12,16 @@ public class UIClick_XR : MonoBehaviour
     public int sceneIndex;
     public void CustomFunction()
     {
-        Debug.Log("executing custom function!");
-        objToShow.SetActive(true);
-        objToHide.SetActive(false);
-        SceneManager.LoadScene(sceneIndex);
+        if (LoadScene)
+        {
+            Debug.Log("executing custom function!");
+            objToShow.SetActive(true);
+            objToHide.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Loading New Scene!");
+            SceneManager.LoadScene(sceneIndex);
+        }
     }
 }
