@@ -12,7 +12,7 @@ public class UIClick_XR : MonoBehaviour
     public int sceneIndex;
     public void CustomFunction()
     {
-        if (LoadScene)
+        if (!LoadScene)
         {
             Debug.Log("executing custom function!");
             objToShow.SetActive(true);
