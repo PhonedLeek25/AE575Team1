@@ -57,6 +57,7 @@ public class RaySelector : MonoBehaviour
             if (didHit)
             {
                 ObjectInformation objInfoScript = hit.collider.GetComponentInParent<ObjectInformation>();
+                UIClick_XR UIClickScript = hit.collider.GetComponentInParent<UIClick_XR>();
 
                 if (objInfoScript != null)
                 {
@@ -73,6 +74,11 @@ public class RaySelector : MonoBehaviour
 
                     // Track current
                     currentObjInfoScript = objInfoScript;
+                }
+                if (UIClickScript != null)
+                {
+                    Debug.Log("Detected your shitty trigger!");
+                    UIClickScript.CustomFunction();
                 }
             }
         }
