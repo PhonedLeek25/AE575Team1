@@ -10218,8 +10218,8 @@ MonoBehaviour:
   textureAName: Wood
   textureA: {fileID: 2800000, guid: e7252dbbc7ec0134b9086beab3bd1401, type: 3}
   costA: 2500
-  textureBName: Marble
-  textureB: {fileID: 2800000, guid: 8f5c041eb7bc5ed47a03e9de14bcda74, type: 3}
+  textureBName: Terrazo
+  textureB: {fileID: 2800000, guid: 7189ac052c3e8dc49b1201e692273b65, type: 3}
   costB: 5000
   textureCName: Carpet
   textureC: {fileID: 2800000, guid: 87f15baad380b674ea76c0782f115926, type: 3}
