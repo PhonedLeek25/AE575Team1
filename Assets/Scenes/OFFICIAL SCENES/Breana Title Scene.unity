@@ -627,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &46888648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4344,7 +4344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &564317328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13940,7 +13940,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.33e-43, y: 6e-44, z: 8e-45, w: 1.6733e-41}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 7e-45, z: 2.243e-41, w: 1.7086657e+19}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
