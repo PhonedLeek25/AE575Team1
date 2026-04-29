@@ -627,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &46888648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4344,7 +4344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &564317328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10489,7 +10489,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 250, y: 200, z: 10}
+  m_Size: {x: 275, y: 200, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1471958975
 GameObject:
@@ -13605,7 +13605,7 @@ GameObject:
   - component: {fileID: 1784955548}
   - component: {fileID: 1784955550}
   - component: {fileID: 1784955549}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: OFFICE BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13666,7 +13666,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 250, y: 200, z: 10}
+  m_Size: {x: 275, y: 200, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1791349058
 GameObject:
@@ -13940,7 +13940,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 7e-45, z: 2.243e-41, w: 1.7086657e+19}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -5.92267e-40}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -14812,7 +14812,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 250, y: 200, z: 10}
+  m_Size: {x: 275, y: 200, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2009692992
 GameObject:
