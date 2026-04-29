@@ -4906,6 +4906,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cost Tracker WorldSpace
       objectReference: {fileID: 0}
+    - target: {fileID: 5590431255782271363, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590431255782271363, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590431255782271363, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 9133032405192791179, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4916,7 +4928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9133032405192791179, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9133032405192791179, guid: 26e6b91bf4de0304984cbf381fd82a1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7320,7 +7332,7 @@ MonoBehaviour:
   currentTexture: {fileID: 0}
   currentCost: 0
   currentTextureName: 
-  CustomName: 
+  CustomName: Office Floor 4
   moveableObject: 0
   objectUI: {fileID: 0}
   textureAName: White Carpet
@@ -9707,7 +9719,7 @@ MonoBehaviour:
   currentTexture: {fileID: 0}
   currentCost: 0
   currentTextureName: 
-  CustomName: 
+  CustomName: Office Floor 4
   moveableObject: 0
   objectUI: {fileID: 0}
   textureAName: Hardwood
