@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing/SampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
   - enabled: 1
@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OFFICIAL SCENES/Office.unity
     guid: 1e597acdf7475074ab489121b20ba9ca
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OFFICIAL SCENES/Classroom.unity
     guid: 6f18a995cb1290a4396dc961fefb72cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OFFICIAL SCENES/Dorm.unity
     guid: 9b58bda1172178b45b5b763df49d0805
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OFFICIAL SCENES/Apartment.unity
     guid: f9acc8feabe17a147a3da3fa17e91314
   m_configObjects:
